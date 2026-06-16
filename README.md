@@ -1,3 +1,14 @@
+# Strapi Cloud Template Blog
+
+> **Maintenance notice:** This repository was generated from an older Strapi template and may contain outdated dependencies. Before deploying publicly, upgrade Strapi and plugins, run `npm audit`, and review configuration/secrets.
+
+## Security checklist before deployment
+
+- Do not commit `.env` files
+- Rotate any local admin/API tokens
+- Run `npm audit` after installing dependencies
+- Upgrade `@strapi/strapi` and official plugins to supported versions
+
 # 🚀 Getting started with Strapi
 
 Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.

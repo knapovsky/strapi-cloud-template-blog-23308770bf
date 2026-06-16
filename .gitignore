@@ -112,3 +112,10 @@ exports
 dist
 build
 .strapi-updater.json
+.env.*
+!.env.example
+node_modules/
+build/
+dist/
+.cache/
+.tmp/
