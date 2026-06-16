@@ -1,74 +1,166 @@
 # Strapi Cloud Template Blog
 
-> **Maintenance notice:** This repository was generated from an older Strapi template and may contain outdated dependencies. Before deploying publicly, upgrade Strapi and plugins, run `npm audit`, and review configuration/secrets.
+A Strapi v4 blog CMS project generated from the Strapi blog template. It includes content types for articles, authors, categories, global site settings, SEO components, seeded demo content, and upload assets.
 
-## Security checklist before deployment
+> Maintenance notice: this repository was generated from an older Strapi template. Before public deployment, upgrade dependencies, run an audit, and review secrets/configuration.
 
-- Do not commit `.env` files
-- Rotate any local admin/API tokens
-- Run `npm audit` after installing dependencies
-- Upgrade `@strapi/strapi` and official plugins to supported versions
+## Features
 
-# 🚀 Getting started with Strapi
+- Strapi v4 headless CMS
+- blog-oriented content model
+- article collection type with draft/publish support
+- author and category relations
+- global site settings single type
+- reusable shared components for media, quotes, rich text, sliders, and SEO
+- GraphQL plugin enabled
+- users-permissions and i18n plugins included
+- SQLite via `better-sqlite3` for simple local development
+- seeded demo data and upload assets under `data/`
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+## Technology stack
 
-### `develop`
+- Node.js >= 16 and <= 20, as defined in `package.json`
+- npm >= 6 or Yarn
+- Strapi 4.13.6
+- SQLite / `better-sqlite3`
+- GraphQL plugin
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+## Repository structure
 
+```text
+.
+├── config/                   # Strapi server, database, middleware, API config
+├── data/                     # Template seed data and sample uploaded images
+├── database/migrations/      # Migration placeholder
+├── public/                   # Public assets and upload placeholder
+├── src/
+│   ├── admin/                # Optional admin customisation examples
+│   ├── api/                  # Content types, controllers, routes, services
+│   │   ├── about/
+│   │   ├── article/
+│   │   ├── author/
+│   │   ├── category/
+│   │   └── global/
+│   ├── components/shared/    # Reusable content components
+│   ├── extensions/           # Strapi extension placeholder
+│   ├── bootstrap.js
+│   └── index.js
+├── .env.example              # Example environment variables
+├── package.json
+├── yarn.lock
+└── README.md
 ```
-npm run develop
-# or
+
+## Content model
+
+The template defines these main content types:
+
+- `Article` — blog posts with title, short description, slug, cover media, author, category, and dynamic content blocks
+- `Author` — author profile data and related articles
+- `Category` — article categorisation
+- `About` — about-page content
+- `Global` — site-wide name, description, favicon, and default SEO metadata
+
+Reusable shared components:
+
+- `shared.media`
+- `shared.quote`
+- `shared.rich-text`
+- `shared.slider`
+- `shared.seo`
+
+## Local setup
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+   or, if you prefer Yarn:
+
+   ```bash
+   yarn install
+   ```
+
+2. Create a local `.env` from the example:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+3. Replace every placeholder secret in `.env` with real random values.
+
+4. Start the development server:
+
+   ```bash
+   npm run develop
+   ```
+
+   or:
+
+   ```bash
+   yarn develop
+   ```
+
+5. Open the Strapi admin panel at:
+
+   ```text
+   http://localhost:1337/admin
+   ```
+
+## Available scripts
+
+```bash
+npm run develop   # Start Strapi with auto-reload
+npm run start     # Start Strapi without auto-reload
+npm run build     # Build the admin panel
+npm run strapi    # Run the Strapi CLI
+```
+
+Yarn equivalents:
+
+```bash
 yarn develop
-```
-
-### `start`
-
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
-```
-npm run start
-# or
 yarn start
-```
-
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-npm run build
-# or
 yarn build
+yarn strapi
 ```
 
-## ⚙️ Deployment
+## Environment variables
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+`.env.example` documents the required values:
 
-## 📚 Learn more
+```text
+HOST=0.0.0.0
+PORT=1337
+APP_KEYS=...
+API_TOKEN_SALT=...
+ADMIN_JWT_SECRET=...
+TRANSFER_TOKEN_SALT=...
+JWT_SECRET=...
+```
 
-- [Resource center](https://strapi.io/resource-center) - Strapi resource center.
-- [Strapi documentation](https://docs.strapi.io) - Official Strapi documentation.
-- [Strapi tutorials](https://strapi.io/tutorials) - List of tutorials made by the core team and the community.
-- [Strapi blog](https://strapi.io/blog) - Official Strapi blog containing articles made by the Strapi team and the community.
-- [Changelog](https://strapi.io/changelog) - Find out about the Strapi product updates, new features and general improvements.
+Generate strong unique values for every secret before running outside a disposable local environment.
 
-Feel free to check out the [Strapi GitHub repository](https://github.com/strapi/strapi). Your feedback and contributions are welcome!
+## Deployment checklist
 
-## Community support
+Before deploying publicly:
 
-For general help using Strapi, please refer to [the official Strapi documentation](https://docs.strapi.io). For additional help, you can use one of these channels to ask a question:
+- upgrade Strapi and official plugins to supported versions
+- run `npm audit` or an equivalent dependency scan
+- rotate all local/admin/API/JWT secrets
+- confirm `.env` is not committed
+- review CORS, middleware, upload, and database configuration
+- configure a production database instead of local SQLite if required
+- rebuild the admin panel with `npm run build`
+- review seeded demo content and uploaded images
+- configure backups for database and uploads
 
-- [Discord](https://discord.strapi.io) (For live discussion with the Community and Strapi team)
-- [GitHub](https://github.com/strapi/strapi) (Bug reports, Contributions)
-- [Community Forum](https://forum.strapi.io) (Questions and Discussions)
-- [Feedback section](https://feedback.strapi.io) (Roadmap, Feature requests)
-- [Twitter](https://twitter.com/strapijs) (Get the news fast)
-- [Facebook](https://www.facebook.com/Strapi-616063331867161)
-- [YouTube Channel](https://www.youtube.com/strapi) (Learn from Video Tutorials)
+## Security notes
 
----
+Do not commit real `.env` files, production databases, generated build caches, private uploads, API tokens, or admin credentials. The current `.env.example` is intentionally sanitized.
 
-<sub>🤫 Psst! [Strapi is hiring](https://strapi.io/careers).</sub>
+## License
+
+`package.json` declares this project as MIT licensed. Review Strapi and plugin licenses before redistribution or commercial deployment.
